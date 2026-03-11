@@ -10,7 +10,7 @@ export type ResolvedMemorySearchConfig = {
   enabled: boolean;
   sources: Array<"memory" | "sessions">;
   extraPaths: string[];
-  provider: "openai" | "local" | "gemini" | "voyage" | "mistral" | "ollama" | "auto";
+  provider: "openai" | "gemini" | "voyage" | "mistral" | "ollama" | "auto";
   remote?: {
     baseUrl?: string;
     apiKey?: SecretInput;
@@ -26,12 +26,8 @@ export type ResolvedMemorySearchConfig = {
   experimental: {
     sessionMemory: boolean;
   };
-  fallback: "openai" | "gemini" | "local" | "voyage" | "mistral" | "ollama" | "none";
+  fallback: "openai" | "gemini" | "voyage" | "mistral" | "ollama" | "none";
   model: string;
-  local: {
-    modelPath?: string;
-    modelCacheDir?: string;
-  };
   store: {
     driver: "sqlite";
     path: string;
@@ -193,10 +189,6 @@ function mergeConfig(
               ? DEFAULT_OLLAMA_MODEL
               : undefined;
   const model = overrides?.model ?? defaults?.model ?? modelDefault ?? "";
-  const local = {
-    modelPath: overrides?.local?.modelPath ?? defaults?.local?.modelPath,
-    modelCacheDir: overrides?.local?.modelCacheDir ?? defaults?.local?.modelCacheDir,
-  };
   const sources = normalizeSources(overrides?.sources ?? defaults?.sources, sessionMemory);
   const rawPaths = [...(defaults?.extraPaths ?? []), ...(overrides?.extraPaths ?? [])]
     .map((value) => value.trim())
@@ -312,7 +304,6 @@ function mergeConfig(
     },
     fallback,
     model,
-    local,
     store,
     chunking: { tokens: Math.max(1, chunking.tokens), overlap },
     sync: {

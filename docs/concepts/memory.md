@@ -101,13 +101,11 @@ Defaults:
 - Configure memory search under `agents.defaults.memorySearch` (not top-level
   `memorySearch`).
 - Uses remote embeddings by default. If `memorySearch.provider` is not set, OpenClaw auto-selects:
-  1. `local` if a `memorySearch.local.modelPath` is configured and the file exists.
-  2. `openai` if an OpenAI key can be resolved.
-  3. `gemini` if a Gemini key can be resolved.
-  4. `voyage` if a Voyage key can be resolved.
-  5. `mistral` if a Mistral key can be resolved.
-  6. Otherwise memory search stays disabled until configured.
-- Local mode uses node-llama-cpp and may require `pnpm approve-builds`.
+  1. `openai` if an OpenAI key can be resolved.
+  2. `gemini` if a Gemini key can be resolved.
+  3. `voyage` if a Voyage key can be resolved.
+  4. `mistral` if a Mistral key can be resolved.
+  5. Otherwise memory search stays disabled until configured.
 - Uses sqlite-vec (when available) to accelerate vector search inside SQLite.
 - `memorySearch.provider = "ollama"` is also supported for local/self-hosted
   Ollama embeddings (`/api/embeddings`), but it is not auto-selected.
@@ -705,13 +703,6 @@ Notes:
   error and continues with the JS fallback (no vector table).
 - `extensionPath` overrides the bundled sqlite-vec path (useful for custom builds
   or non-standard install locations).
-
-### Local embedding auto-download
-
-- Default local embedding model: `hf:ggml-org/embeddinggemma-300m-qat-q8_0-GGUF/embeddinggemma-300m-qat-Q8_0.gguf` (~0.6 GB).
-- When `memorySearch.provider = "local"`, `node-llama-cpp` resolves `modelPath`; if the GGUF is missing it **auto-downloads** to the cache (or `local.modelCacheDir` if set), then loads it. Downloads resume on retry.
-- Native build requirement: run `pnpm approve-builds`, pick `node-llama-cpp`, then `pnpm rebuild node-llama-cpp`.
-- Fallback: if local setup fails and `memorySearch.fallback = "openai"`, we automatically switch to remote embeddings (`openai/text-embedding-3-small` unless overridden) and record the reason.
 
 ### Custom OpenAI-compatible endpoint example
 

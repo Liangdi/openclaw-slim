@@ -6,7 +6,7 @@ const asConfig = (cfg: OpenClawConfig): OpenClawConfig => cfg;
 
 describe("memory search config", () => {
   function configWithDefaultProvider(
-    provider: "openai" | "local" | "gemini" | "mistral" | "ollama",
+    provider: "openai" | "gemini" | "voyage" | "mistral" | "ollama",
   ): OpenClawConfig {
     return asConfig({
       agents: {
@@ -135,12 +135,6 @@ describe("memory search config", () => {
     const cfg = configWithDefaultProvider("openai");
     const resolved = resolveMemorySearchConfig(cfg, "main");
     expectDefaultRemoteBatch(resolved);
-  });
-
-  it("keeps remote unset for local provider without overrides", () => {
-    const cfg = configWithDefaultProvider("local");
-    const resolved = resolveMemorySearchConfig(cfg, "main");
-    expect(resolved?.remote).toBeUndefined();
   });
 
   it("includes remote defaults for gemini without overrides", () => {

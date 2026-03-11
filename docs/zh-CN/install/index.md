@@ -85,7 +85,7 @@ SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm install -g openclaw@latest
 
 ```bash
 pnpm add -g openclaw@latest
-pnpm approve-builds -g                # 批准 openclaw、node-llama-cpp、sharp 等
+pnpm approve-builds -g                # 批准 openclaw、sharp 等
 pnpm add -g openclaw@latest           # 重新运行以执行 postinstall 脚本
 ```
 

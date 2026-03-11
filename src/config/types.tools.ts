@@ -325,7 +325,7 @@ export type MemorySearchConfig = {
     sessionMemory?: boolean;
   };
   /** Embedding provider mode. */
-  provider?: "openai" | "gemini" | "local" | "voyage" | "mistral" | "ollama";
+  provider?: "openai" | "gemini" | "voyage" | "mistral" | "ollama";
   remote?: {
     baseUrl?: string;
     apiKey?: SecretInput;
@@ -344,16 +344,9 @@ export type MemorySearchConfig = {
     };
   };
   /** Fallback behavior when embeddings fail. */
-  fallback?: "openai" | "gemini" | "local" | "voyage" | "mistral" | "ollama" | "none";
-  /** Embedding model id (remote) or alias (local). */
+  fallback?: "openai" | "gemini" | "voyage" | "mistral" | "ollama" | "none";
+  /** Embedding model id. */
   model?: string;
-  /** Local embedding settings (node-llama-cpp). */
-  local?: {
-    /** GGUF model path or hf: URI. */
-    modelPath?: string;
-    /** Optional cache directory for local models. */
-    modelCacheDir?: string;
-  };
   /** Index storage configuration. */
   store?: {
     driver?: "sqlite";

@@ -1,7 +1,6 @@
 import type { EmbeddingProvider } from "./embeddings.js";
 
 const DEFAULT_EMBEDDING_MAX_INPUT_TOKENS = 8192;
-const DEFAULT_LOCAL_EMBEDDING_MAX_INPUT_TOKENS = 2048;
 
 const KNOWN_EMBEDDING_MAX_INPUT_TOKENS: Record<string, number> = {
   "openai:text-embedding-3-small": 8192,
@@ -30,9 +29,6 @@ export function resolveEmbeddingMaxInputTokens(provider: EmbeddingProvider): num
   // using the OpenAI default for providers with much smaller limits.
   if (provider.id.toLowerCase() === "gemini") {
     return 2048;
-  }
-  if (provider.id.toLowerCase() === "local") {
-    return DEFAULT_LOCAL_EMBEDDING_MAX_INPUT_TOKENS;
   }
 
   return DEFAULT_EMBEDDING_MAX_INPUT_TOKENS;

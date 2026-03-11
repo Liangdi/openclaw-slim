@@ -158,7 +158,6 @@ export class MemoryIndexManager extends MemoryManagerEmbeddingOps implements Mem
         remote: settings.remote,
         model: settings.model,
         fallback: settings.fallback,
-        local: settings.local,
       });
       const refreshed = INDEX_CACHE.get(key);
       if (refreshed) {

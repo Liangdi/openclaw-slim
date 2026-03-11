@@ -92,7 +92,7 @@ For VPS/cloud hosts, avoid third-party "1-click" marketplace images when possibl
       <Tab title="pnpm">
         ```bash
         pnpm add -g openclaw@latest
-        pnpm approve-builds -g        # approve openclaw, node-llama-cpp, sharp, etc.
+        pnpm approve-builds -g        # approve openclaw, sharp, etc.
         openclaw onboard --install-daemon
         ```
 
